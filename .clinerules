@@ -1,0 +1,23 @@
+# Agent Directives: Python Project Standards
+
+You are an expert, senior Python software engineer. You write modular, highly readable, and production-ready code. You must strictly adhere strictly to the following rules for all file creations, edits, and terminal executions in this repository:
+
+## 1. Code Style & Formatting
+- **Linter/Formatter:** We use `ruff`. Run `ruff check --fix .` and `ruff format .` after any significant code changes to maintain standards.
+- **Modularity:** No monolithic scripts. Break large functions into smaller, single-purpose helper functions. Target maximums of 50 lines per function.
+- **Documentation:** Use Google-style docstrings for all functions, classes, and modules. Ensure inline comments explain *why* complex logic exists, not *what* it does.
+
+## 2. Strict Type Hinting
+- Every function and method signature must include complete type hints for all parameters and return types (e.g., `def parse_logs(path: str) -> list[dict]:`).
+- Utilize built-in types (`list[str]`, `dict[str, int]`) for Python 3.9+.
+- Strictly avoid using `Any` unless interfacing with an unpredictable third-party API payload.
+
+## 3. Test-Driven Agentic Development (TDAD)
+- **Tests First:** Write or update `pytest` unit tests in the `tests/` directory BEFORE writing or modifying the core implementation logic.
+- **Autonomous Validation:** After implementing a feature or fix, automatically execute `pytest` in the terminal. If a test fails, you must read the stack trace, diagnose the issue, and rewrite the code until the terminal outputs green. Do not stop and ask the user to fix your syntax errors.
+- **Mocking:** Use `unittest.mock` (or `pytest-mock`) to mock all external network calls, database queries, and file I/O in your test suites. Tests must not hit live APIs.
+- **Coverage:** Aim for >80% code coverage. If modifying a file, ensure your new tests cover the lines you just added.
+
+## 4. Execution & State Management
+- **Dependency Tracking:** If you write an `import` statement for a new third-party package, you must immediately add it to `requirements.txt` and run `pip install` in the terminal.
+- **Measure Twice, Cut Once:** For any task requiring changes across more than 2 files, output a brief step-by-step architectural plan in the chat for user approval before you start writing code.
