@@ -21,3 +21,4 @@ You are an expert, senior Python software engineer. You write modular, highly re
 ## 4. Execution & State Management
 - **Dependency Tracking:** If you write an `import` statement for a new third-party package, you must immediately add it to `requirements.txt` and run `pip install` in the terminal.
 - **Measure Twice, Cut Once:** For any task requiring changes across more than 2 files, output a brief step-by-step architectural plan in the chat for user approval before you start writing code.
+- **Terminal Output:** When executing CLI commands that typically open a pager (like `git`, `gh`, or `less`), you MUST disable the pager (e.g., by prepending `GH_PAGER=` or `PAGER=cat`) or use `--json` flags so the output prints directly to standard output for you to read.
