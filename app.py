@@ -26,8 +26,12 @@ days = st.sidebar.slider(
     value=7
 )
 
-@st.cache_data(ttl=600)
-def fetch_repos(lang, days_ago):
+@st.cache_data(ttl=3600)
+def fetch_trending_github_repos(lang: str, days_ago: int):
+    """
+    Fetches trending GitHub repositories created in the past `days_ago` days,
+    optionally filtered by programming language `lang`, cached for 1 hour.
+    """
     date_threshold = (datetime.now() - timedelta(days=days_ago)).strftime('%Y-%m-%d')
     query = f"created:>{date_threshold}"
     if lang != "All":
@@ -60,7 +64,7 @@ def fetch_repos(lang, days_ago):
 
 # Fetch data
 with st.spinner(f"Fetching trending repositories for {language} over the last {days} days..."):
-    repositories = fetch_repos(language, days)
+    repositories = fetch_trending_github_repos(language, days)
 
 if repositories:
     st.success(f"Successfully fetched {len(repositories)} repositories!")
